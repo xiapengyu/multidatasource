@@ -36,6 +36,6 @@ public class DynamicDataSourceContextHolder {
      * 采用简单生成随机数的方式切换不同的从库
      */
     public static void setDefault() {
-        DynamicDataSourceContextHolder.set(DataSourceKey.db01);
+        DynamicDataSourceContextHolder.set(DataSourceKey.cha);
     }
 }

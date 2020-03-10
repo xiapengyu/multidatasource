@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.multidatasource.mapper.cha.UserInfoOverviewMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.multidatasource.entity.cha.UserInfoOverview" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="NUMERIC" />
+    <result column="all_recharge_amount" property="allRechargeAmount" jdbcType="NUMERIC" />
+    <result column="all_consume_amount" property="allConsumeAmount" jdbcType="NUMERIC" />
+    <result column="all_electricity_kwh" property="allElectricityKwh" jdbcType="NUMERIC" />
+    <result column="all_consume_num" property="allConsumeNum" jdbcType="INTEGER" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="total_charging_time" property="totalChargingTime" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="SMALLINT" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="VARCHAR" />
+    <result column="station_uuid" property="stationUuid" jdbcType="VARCHAR" />
+    <result column="activity_locking_amount" property="activityLockingAmount" jdbcType="NUMERIC" />
+    <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
+    <result column="is_sync" property="isSync" jdbcType="SMALLINT" />
+    <result column="channel_locking_amount" property="channelLockingAmount" jdbcType="NUMERIC" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_uuid, balance, all_recharge_amount, all_consume_amount, all_electricity_kwh, 
+    all_consume_num, sign, total_charging_time, phone, create_time, create_user, update_time, 
+    update_user, delete_flag, province_id, city_id, region_id, station_uuid, activity_locking_amount, 
+    avatar_url, nick_name, union_id, is_sync, channel_locking_amount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverviewCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cha.user_info_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cha.user_info_overview
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cha.user_info_overview
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverviewCriteria" >
+    delete from cha.user_info_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverview" >
+    insert into cha.user_info_overview (user_uuid, balance,
+      all_recharge_amount, all_consume_amount, all_electricity_kwh, 
+      all_consume_num, sign, total_charging_time, 
+      phone, create_time, create_user, 
+      update_time, update_user, delete_flag, 
+      province_id, city_id, region_id, 
+      station_uuid, activity_locking_amount, avatar_url, 
+      nick_name, union_id, is_sync, 
+      channel_locking_amount)
+    values (#{userUuid,jdbcType=VARCHAR}, #{balance,jdbcType=NUMERIC},
+      #{allRechargeAmount,jdbcType=NUMERIC}, #{allConsumeAmount,jdbcType=NUMERIC}, #{allElectricityKwh,jdbcType=NUMERIC}, 
+      #{allConsumeNum,jdbcType=INTEGER}, #{sign,jdbcType=VARCHAR}, #{totalChargingTime,jdbcType=BIGINT}, 
+      #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=SMALLINT}, 
+      #{provinceId,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, #{regionId,jdbcType=VARCHAR}, 
+      #{stationUuid,jdbcType=VARCHAR}, #{activityLockingAmount,jdbcType=NUMERIC}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, #{isSync,jdbcType=SMALLINT}, 
+      #{channelLockingAmount,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverview" >
+    insert into cha.user_info_overview
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="allRechargeAmount != null" >
+        all_recharge_amount,
+      </if>
+      <if test="allConsumeAmount != null" >
+        all_consume_amount,
+      </if>
+      <if test="allElectricityKwh != null" >
+        all_electricity_kwh,
+      </if>
+      <if test="allConsumeNum != null" >
+        all_consume_num,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="totalChargingTime != null" >
+        total_charging_time,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="regionId != null" >
+        region_id,
+      </if>
+      <if test="stationUuid != null" >
+        station_uuid,
+      </if>
+      <if test="activityLockingAmount != null" >
+        activity_locking_amount,
+      </if>
+      <if test="avatarUrl != null" >
+        avatar_url,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="unionId != null" >
+        union_id,
+      </if>
+      <if test="isSync != null" >
+        is_sync,
+      </if>
+      <if test="channelLockingAmount != null" >
+        channel_locking_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=NUMERIC},
+      </if>
+      <if test="allRechargeAmount != null" >
+        #{allRechargeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="allConsumeAmount != null" >
+        #{allConsumeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="allElectricityKwh != null" >
+        #{allElectricityKwh,jdbcType=NUMERIC},
+      </if>
+      <if test="allConsumeNum != null" >
+        #{allConsumeNum,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="totalChargingTime != null" >
+        #{totalChargingTime,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="stationUuid != null" >
+        #{stationUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="activityLockingAmount != null" >
+        #{activityLockingAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="avatarUrl != null" >
+        #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSync != null" >
+        #{isSync,jdbcType=SMALLINT},
+      </if>
+      <if test="channelLockingAmount != null" >
+        #{channelLockingAmount,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverviewCriteria" resultType="java.lang.Integer" >
+    select count(*) from cha.user_info_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cha.user_info_overview
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userUuid != null" >
+        user_uuid = #{record.userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=NUMERIC},
+      </if>
+      <if test="record.allRechargeAmount != null" >
+        all_recharge_amount = #{record.allRechargeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.allConsumeAmount != null" >
+        all_consume_amount = #{record.allConsumeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.allElectricityKwh != null" >
+        all_electricity_kwh = #{record.allElectricityKwh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.allConsumeNum != null" >
+        all_consume_num = #{record.allConsumeNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.sign != null" >
+        sign = #{record.sign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalChargingTime != null" >
+        total_charging_time = #{record.totalChargingTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionId != null" >
+        region_id = #{record.regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationUuid != null" >
+        station_uuid = #{record.stationUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityLockingAmount != null" >
+        activity_locking_amount = #{record.activityLockingAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.avatarUrl != null" >
+        avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionId != null" >
+        union_id = #{record.unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSync != null" >
+        is_sync = #{record.isSync,jdbcType=SMALLINT},
+      </if>
+      <if test="record.channelLockingAmount != null" >
+        channel_locking_amount = #{record.channelLockingAmount,jdbcType=NUMERIC},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cha.user_info_overview
+    set id = #{record.id,jdbcType=INTEGER},
+      user_uuid = #{record.userUuid,jdbcType=VARCHAR},
+      balance = #{record.balance,jdbcType=NUMERIC},
+      all_recharge_amount = #{record.allRechargeAmount,jdbcType=NUMERIC},
+      all_consume_amount = #{record.allConsumeAmount,jdbcType=NUMERIC},
+      all_electricity_kwh = #{record.allElectricityKwh,jdbcType=NUMERIC},
+      all_consume_num = #{record.allConsumeNum,jdbcType=INTEGER},
+      sign = #{record.sign,jdbcType=VARCHAR},
+      total_charging_time = #{record.totalChargingTime,jdbcType=BIGINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=VARCHAR},
+      region_id = #{record.regionId,jdbcType=VARCHAR},
+      station_uuid = #{record.stationUuid,jdbcType=VARCHAR},
+      activity_locking_amount = #{record.activityLockingAmount,jdbcType=NUMERIC},
+      avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      union_id = #{record.unionId,jdbcType=VARCHAR},
+      is_sync = #{record.isSync,jdbcType=SMALLINT},
+      channel_locking_amount = #{record.channelLockingAmount,jdbcType=NUMERIC}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverview" >
+    update cha.user_info_overview
+    <set >
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=NUMERIC},
+      </if>
+      <if test="allRechargeAmount != null" >
+        all_recharge_amount = #{allRechargeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="allConsumeAmount != null" >
+        all_consume_amount = #{allConsumeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="allElectricityKwh != null" >
+        all_electricity_kwh = #{allElectricityKwh,jdbcType=NUMERIC},
+      </if>
+      <if test="allConsumeNum != null" >
+        all_consume_num = #{allConsumeNum,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="totalChargingTime != null" >
+        total_charging_time = #{totalChargingTime,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        region_id = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="stationUuid != null" >
+        station_uuid = #{stationUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="activityLockingAmount != null" >
+        activity_locking_amount = #{activityLockingAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="avatarUrl != null" >
+        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        union_id = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSync != null" >
+        is_sync = #{isSync,jdbcType=SMALLINT},
+      </if>
+      <if test="channelLockingAmount != null" >
+        channel_locking_amount = #{channelLockingAmount,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverview" >
+    update cha.user_info_overview
+    set user_uuid = #{userUuid,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=NUMERIC},
+      all_recharge_amount = #{allRechargeAmount,jdbcType=NUMERIC},
+      all_consume_amount = #{allConsumeAmount,jdbcType=NUMERIC},
+      all_electricity_kwh = #{allElectricityKwh,jdbcType=NUMERIC},
+      all_consume_num = #{allConsumeNum,jdbcType=INTEGER},
+      sign = #{sign,jdbcType=VARCHAR},
+      total_charging_time = #{totalChargingTime,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      region_id = #{regionId,jdbcType=VARCHAR},
+      station_uuid = #{stationUuid,jdbcType=VARCHAR},
+      activity_locking_amount = #{activityLockingAmount,jdbcType=NUMERIC},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      union_id = #{unionId,jdbcType=VARCHAR},
+      is_sync = #{isSync,jdbcType=SMALLINT},
+      channel_locking_amount = #{channelLockingAmount,jdbcType=NUMERIC}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.spring.multidatasource.entity.cha.UserInfoOverviewCriteria" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cha.user_info_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -31,12 +31,12 @@ public class DynamicDataSourceAspect {
     @Before("@annotation(targetDataSource)")
     public void doBefore(JoinPoint joinPoint, TargetDataSource targetDataSource) {
         DataSourceKey dataSourceKey = targetDataSource.dataSourceKey();
-        if (dataSourceKey == DataSourceKey.db02) {
-            System.out.println(String.format("设置数据源为  %s", DataSourceKey.db02));
-            DynamicDataSourceContextHolder.set(DataSourceKey.db02);
+        if (dataSourceKey == DataSourceKey.oma) {
+            System.out.println(String.format("设置数据源为  %s", DataSourceKey.oma));
+            DynamicDataSourceContextHolder.set(DataSourceKey.oma);
         } else {
-            System.out.println(String.format("设置数据源为  %s", DataSourceKey.db01));
-            DynamicDataSourceContextHolder.set(DataSourceKey.db01);
+            System.out.println(String.format("设置数据源为  %s", DataSourceKey.cha));
+            DynamicDataSourceContextHolder.set(DataSourceKey.cha);
         }
     }
 

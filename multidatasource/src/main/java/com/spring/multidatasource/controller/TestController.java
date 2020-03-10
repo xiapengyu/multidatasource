@@ -1,34 +1,45 @@
 package com.spring.multidatasource.controller;
 
-import com.spring.multidatasource.dao.db01.User01Dao;
-import com.spring.multidatasource.dao.db02.User02Dao;
-import com.spring.multidatasource.entity.db01.User;
-import com.spring.multidatasource.entity.db02.User02;
+import com.spring.multidatasource.entity.cha.UserInfoOverview;
+import com.spring.multidatasource.entity.oma.OmaAccount;
 import com.spring.multidatasource.service.UserService;
 import com.spring.multidatasource.util.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private UserService userServiceImpl;
 
-    @RequestMapping("/db01")
-    public String testDb01(){
-        User u = userServiceImpl.queryUserById(1L);
-        System.out.println(JsonUtil.toJsonString(u));
-        return JsonUtil.toJsonString(u);
+    @RequestMapping(value = "/hello", method = RequestMethod.POST)
+    public String hello() {
+        System.out.println("hello");
+        return "hello";
     }
 
-    @RequestMapping("/db02")
-    public String testDb02(){
-        User02 u = userServiceImpl.queryUser02ById(1L);
-        System.out.println(JsonUtil.toJsonString(u));
-        return JsonUtil.toJsonString(u);
+    @RequestMapping(value = "/queryUserList", method = RequestMethod.POST)
+    public String queryUserList() {
+        List<UserInfoOverview> list = userServiceImpl.queryUserList();
+        logger.info("返回结果:{}", JsonUtil.toJsonString(list.subList(0, 5)));
+        return "hello";
+    }
+
+    @RequestMapping(value = "/queryAccountList", method = RequestMethod.POST)
+    public String queryAccountList() {
+        List<OmaAccount> list = userServiceImpl.queryOmaAccountList();
+        logger.info("返回结果:{}", JsonUtil.toJsonString(list.subList(0, 5)));
+        return "hello";
     }
 
 }

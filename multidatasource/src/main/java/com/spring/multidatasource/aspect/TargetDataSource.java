@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TargetDataSource {
-    DataSourceKey dataSourceKey() default DataSourceKey.db01;
+    DataSourceKey dataSourceKey() default DataSourceKey.cha;
 }

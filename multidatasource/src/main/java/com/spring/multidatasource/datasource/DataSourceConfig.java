@@ -25,16 +25,16 @@ public class DataSourceConfig {
     // 将这个对象放入Spring容器中
     @Bean(name = "dataSource1")
     // 表示这个数据源是默认数据源
-    //@Primary
+    @Primary
     // 读取application.properties中的配置参数映射成为一个对象
     // prefix表示参数的前缀
-    @ConfigurationProperties(prefix = "spring.datasource.db01")
+    @ConfigurationProperties(prefix = "spring.datasource.cha")
     public DataSource getDateSource1() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "dataSource2")
-    @ConfigurationProperties(prefix = "spring.datasource.db02")
+    @ConfigurationProperties(prefix = "spring.datasource.oma")
     public DataSource getDateSource2() {
         return DataSourceBuilder.create().build();
     }
@@ -45,8 +45,8 @@ public class DataSourceConfig {
         DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
         dataSource.setDefaultTargetDataSource(dataSource1);
         Map<Object, Object> dataSourceMap = new HashMap<>(2);
-        dataSourceMap.put(DataSourceKey.db01, dataSource1);
-        dataSourceMap.put(DataSourceKey.db02, dataSource2);
+        dataSourceMap.put(DataSourceKey.cha, dataSource1);
+        dataSourceMap.put(DataSourceKey.oma, dataSource2);
         dataSource.setTargetDataSources(dataSourceMap);
         return dataSource;
     }

@@ -46,9 +46,13 @@ public class UserServiceImpl implements UserService {
     @TargetDataSource(dataSourceKey = DataSourceKey.oma)
     @Override
     public void saveAccount() {
-        long from = 10000201011L;
-        long to = 10000201060L;
+        long from = 10000200001L;
+        long to = 10000201000L;
         for (long i = from; i <= to; i++) {
+            OmaAccount record = accountDao.queryByPhone(i + "");
+            if(record != null){
+                continue;
+            }
             OmaAccount account = new OmaAccount();
             account.setUuid(UUIDUtil.getUUID());
             account.setPhone(i + "");
@@ -102,10 +106,18 @@ public class UserServiceImpl implements UserService {
     @TargetDataSource(dataSourceKey = DataSourceKey.cha)
     @Override
     public void saveUser(List<OmaAccount> list, Map<String, AccountDto> map) {
-        long from = 10000201011L;
-        long to = 10000201060L;
+        long from = 10000200001L;
+        long to = 10000201000L;
         for (long i = from; i <= to; i++) {
             AccountDto account = map.get(i + "");
+            UserInfoOverview record = userInfoDao.queryByPhone(i + "");
+            if(record != null){
+                Map<String, String> resultMap = StrUtils.rechargeTool(record.getUserUuid(), 10000);
+                record.setBalance(new BigDecimal(10000));
+                record.setSign(resultMap.get("sign"));
+                userInfoDao.updateUser(record);
+                continue;
+            }
             UserInfoOverview userInfo = new UserInfoOverview();
             userInfo.setAllConsumeAmount(new BigDecimal(0));
             userInfo.setAllConsumeNum(0);
@@ -121,7 +133,7 @@ public class UserServiceImpl implements UserService {
             userInfo.setDeleteFlag((short) 1);
             userInfo.setAllElectricityKwh(new BigDecimal(0));
             userInfo.setPhone(i + "");
-            userInfo.setUserUuid(resultMap.get("userUuid"));
+            userInfo.setUserUuid(account.getUuid());
             userInfo.setTotalChargingTime(0L);
             userInfo.setUpdateTime(new Date());
             userInfo.setUpdateUser(i + "");

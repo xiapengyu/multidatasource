@@ -32,7 +32,6 @@ public class AccountDao extends BaseDao<OmaAccountMapper, OmaAccountMapper, OmaA
         List<OmaAccount> list = this.getMapper().selectByExample(c);
         return list;
     }
-
     public OmaAccount queryByPhone(String phone) {
         OmaAccountCriteria c = new OmaAccountCriteria();
         OmaAccountCriteria.Criteria cc = c.createCriteria();

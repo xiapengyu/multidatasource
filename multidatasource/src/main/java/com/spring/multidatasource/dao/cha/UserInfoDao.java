@@ -27,6 +27,22 @@ public class UserInfoDao extends BaseDao<UserInfoOverviewMapper, UserInfoOvervie
         this.getMapper().insert(userInfo);
     }
 
+    public void updateUser(UserInfoOverview userInfo){
+        this.getMapper().updateByPrimaryKey(userInfo);
+    }
+
+    public UserInfoOverview queryByPhone(String phone){
+        UserInfoOverviewCriteria c = new UserInfoOverviewCriteria();
+        UserInfoOverviewCriteria.Criteria cc = c.createCriteria();
+        cc.andPhoneEqualTo(phone);
+        List<UserInfoOverview> list = this.getMapper().selectByExample(c);
+        if(list != null && list.size() > 0){
+            return list.get(0);
+        }else{
+            return null;
+        }
+    }
+
     public List<UserInfoOverview> queryList(){
         UserInfoOverviewCriteria c = new UserInfoOverviewCriteria();
         UserInfoOverviewCriteria.Criteria cc = c.createCriteria();
